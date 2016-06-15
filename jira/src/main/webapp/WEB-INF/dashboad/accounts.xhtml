@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:dataTable id="accountsTable" widgetVar="accountsTable" 
+		value="#{accountsQueries.accounts}" var="account" rowKey="account.id"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+		paginator="true" rows="4" paginatorPosition="bottom"
+		emptyMessage="No account found with given criteria">
+		<p:column headerText="Id" style="text-align: center" sortBy="#{account.id}">
+			<h:outputText value="#{account.id}" />
+		</p:column>
+		<p:column headerText="Name" style="text-align: center" sortBy="#{account.name}">
+			<h:outputText value="#{account.name}" />
+		</p:column>
+		<p:column headerText="Status" style="text-align: center">
+			<h:outputText value="#{account.status}" />
+		</p:column>
+		<p:column headerText="Role" style="text-align: center">
+			<h:selectOneMenu id="role" value="#{account.role}">
+				<f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
+				<f:selectItem itemLabel="USER" itemValue="USER" />
+			</h:selectOneMenu>
+		</p:column>
+		<p:column headerText="Registration Time" style="text-align: center">
+			<h:outputText value="#{account.lastLoginTime}" />
+		</p:column>
+		<p:column headerText="Actions" style="text-align: center" rendered="#{sessionController.admin}">
+			<p:commandButton value="Del"
+				action="#{accountsQueries.remove(account.id)}" update="accountsTable">
+			</p:commandButton>
+			<p:commandButton value="Appr"
+				action="#{accountsQueries.approve(account.id)}" update="accountsTable">
+			</p:commandButton>		
+			<p:commandButton value="Rej"
+				action="#{accountsQueries.reject(account.id)}" update="accountsTable">
+			</p:commandButton>			
+		</p:column>
+	</p:dataTable>
+</ui:composition>
