@@ -1,0 +1,8 @@
+# Ignore settings files
+
+**/.settings
+**/.classpath
+**/.project
+**/.metadata
+
+**/target
