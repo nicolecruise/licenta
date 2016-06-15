@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/template.xhtml" xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		<!-- the split into sections -->
+		<p:layout style="height:100%">
+			<p:layoutUnit position="center" header="User Management">
+					<h:form>	
+			<p:commandLink action="#{sessionData.logout()}" value="logout" />
+		</h:form>
+			</p:layoutUnit>
+		</p:layout>
+	</ui:define>
+</ui:composition>

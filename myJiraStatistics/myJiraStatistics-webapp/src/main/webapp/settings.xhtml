@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns="http://www.w3.org/1999/xhtml">
+	<ui:define name="content">Statistics Data Content test
+
+ <h1>CGEVebgfiowe</h1>
+		<table>
+			<ui:repeat var="dataItem" value="#{sessionData.dataList}">
+				<tr>
+					<td><p:outputLabel value="#{dataItem.project}" /></td>
+					<td>#{dataItem.issueType}</td>
+					<td>#{dataItem.project}</td>
+					<td>#{dataItem.sprint}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+		<br />
+		<br />
+		<p:dataTable var="dataItem" value="#{sessionData.dataList}">
+			<p:column>
+			#{dataItem.project}
+		</p:column>
+			<p:column>
+			#{dataItem.issueType}
+		</p:column>
+			<p:column>
+			#{dataItem.sprint}
+		</p:column>
+		</p:dataTable>
+		<br />
+		<br />
+		<h1>New data:</h1>
+		<h:form id="dataForm">
+			<p:inputText value="#{sessionData.dataToBeSaved.id}" />
+			<p:inputText value="#{sessionData.dataToBeSaved.project}" />
+			<p:inputText value="#{sessionData.dataToBeSaved.issueType}" />
+			<p:inputText value="#{sessionData.dataToBeSaved.sprint}" />
+			<p:inputText value="#{sessionData.dataToBeSaved.value}" />
+			<p:commandButton value="Save" action="#{sessionData.saveNewData()}"
+				update=":some" />
+		</h:form>
+		<br />
+		<br />
+		<h1>REmove</h1>
+		<h:form id="some">
+			<p:dataTable id="dataTable" var="dataItem"
+				value="#{sessionData.allData}">
+				<p:column headerText="Project">
+					<h:outputText value="#{dataItem.project}" />
+				</p:column>
+				<p:column headerText="Issue Type">
+					<h:outputText value="#{dataItem.issueType}" />
+				</p:column>
+				<p:column headerText="Sprint">
+					<h:outputText value="#{dataItem.sprint}" />
+				</p:column>
+				<p:column headerText="Project">
+					<p:commandLink value="remove"
+						action="#{sessionData.removeData(dataItem)}" update="dataTable" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+

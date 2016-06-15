@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+<h:body>
+<!-- <p:layoutUnit position="north" style="background: red !important;" size="auto" resizable="true" closable="true" >
+</p:layoutUnit> -->
+	<p:outputLabel id="countLabel" value="Count: #{mySessionData.count}" />
+	<br />
+	<h:form>
+		<p:commandButton value="Increase Count"
+			action="#{mySessionData.increaseCount()}" ajax="true"
+			update=":countLabel" />
+		<br />
+		<p:commandButton value="Logout" action="#{mySessionData.logout()}" />
+	</h:form>
+	<h:form>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:commandLink value="settings" update="growl"
+			action="#{mySessionData.navigateToSetings()}" />
+	</h:form>
+	<br />
+	<h:link value="settings" outcome="settings" />
+	<br />
+	<table>
+		<ui:repeat var="pet" value="#{mySessionData.pets}">
+			<tr>
+				<td><p:outputLabel value="#{pet.name}" /></td>
+				<td>#{pet.type}</td>
+				<td>#{pet.age}</td>
+			</tr>
+		</ui:repeat>
+	</table>
+	<br />
+	<br />
+	<h:dataTable var="pet" value="#{mySessionData.pets}">
+		<h:column>
+			#{pet.name}
+		</h:column>
+		<h:column>
+			#{pet.type}
+		</h:column>
+		<h:column>
+			#{pet.age}
+		</h:column>
+	</h:dataTable>
+		<br />
+	<br />
+	<h:form>
+	<p:dataTable id="petTable" var="pet" value="#{mySessionData.pets}">
+	    <p:column headerText="Name">
+	        <h:outputText value="#{pet.name}" />
+	    </p:column>	 
+	    <p:column headerText="Type">
+	        <h:outputText value="#{pet.type}" />
+	    </p:column>	 
+	    <p:column headerText="Age">
+	        <h:outputText value="#{pet.age}" />
+	    </p:column>
+	    <p:column headerText="Age">
+	        <p:commandLink value="remove" 
+	        	action="#{mySessionData.removeMyPet(pet)}" 
+	        	update="petTable" /> 
+	    </p:column>
+	</p:dataTable>
+	</h:form>
+	<br />
+	<h:form id="petForm">
+		<p:inputText value="#{mySessionData.petToBeSaved.name}" />
+		<p:inputText value="#{mySessionData.petToBeSaved.type}" />
+		<p:inputText value="#{mySessionData.petToBeSaved.age}" />
+		<p:commandButton value="Save" action="#{mySessionData.saveMyPet()}" 
+			update="petForm" />
+	</h:form>
+</h:body>
+</html>

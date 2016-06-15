@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Sign Up Page</title>
+</h:head>
+<h:body>
+	<h:form id="signupForm">
+		<p:outputPanel style="padding:10px">
+			<p:panel id="panel" header="Registration Account">
+		<p:messages id="msgs" autoUpdate="true" showDetail="true"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="username" value="Username:" />
+			<p:inputText id="username" value="#{myRegistration.user.name}"
+				required="true" label="username" />
+			<p:outputLabel for="password" value="Password:" />
+			<p:password id="password" value="#{myRegistration.user.password}"
+				required="true" label="password" feedback="true" match="password_2"/>
+			<p:outputLabel for="password_2" value="Confirm Password:" />
+			<p:password id="password_2" value="#{myRegistration.user.password_2}"
+				required="true" label="password_2">
+				 <f:ajax event="blur" listener="#{myRegistration.validatePassword}" />
+				</p:password>
+
+			<p:commandButton value="Register"
+				action="#{myRegistration.processUser()}" ajax="false" />
+				
+		</h:panelGrid>
+		</p:panel>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+</html>

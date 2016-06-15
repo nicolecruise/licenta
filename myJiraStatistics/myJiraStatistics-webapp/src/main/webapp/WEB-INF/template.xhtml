@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyJIRAStatistics</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</h:head>
+<h:body>
+	<div style="float: right">
+		<h:form>	
+			<p:commandLink action="#{userSession.logout()}" value="Sign out" ajax="false" />
+		</h:form>
+	</div>
+	<br />
+	<h:form>
+		<p:tabMenu>
+			<p:menuitem rendered="#{userSession.isAdmin}" value="Admin Dashboard"
+				outcome="/dashboard2" />
+			<p:menuitem value="Project Statistics" outcome="/projectstatistics" />
+			<p:menuitem value="Raports" outcome="/raports" />
+			<p:menuitem value="Settings" outcome="/settings" />
+			<p:menuitem value="Help" outcome="/help" />
+		</p:tabMenu>
+	</h:form>	
+	<ui:insert name="content">DEFAULT CONTENT</ui:insert>
+
+	<!-- <p:layout  fullPage="false"> -->
+	<p:layoutUnit position="south"
+		style=" text-align:center; bottom: 0px; visibility: visible;"
+		styleClass="footer">
+		<ui:include src="/footer.xhtml" />
+	</p:layoutUnit>
+	<!-- </p:layout> -->
+</h:body>
+</html>
